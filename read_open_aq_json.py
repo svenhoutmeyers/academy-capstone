@@ -1,12 +1,3 @@
-"""
-Illustrating how data can be read from files.
-CSVs are ubiquitous and have many flavors, so the number of options for the CSV
-reader is larger than that for other sources, like JSON and Parquet.
-Also introducing the filter and orderBy methods.
-When datasets get small enough that they might fit in the memory of the driver,
-you can call collect or toPandas on them. From that moment on, you're no longer
-working on distributed data.
-"""
 from pyspark import SparkConf, SparkContext
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import *
@@ -17,7 +8,6 @@ import json
 #print(os.environ["AWS_SECRET_ACCESS_KEY"])
 
 packages = (
-  "org.apache.hadoop:hadoop-aws:3.1.2",
   "net.snowflake:spark-snowflake_2.12:2.9.0-spark_3.1",
   "net.snowflake:snowflake-jdbc:3.13.3"
 )
@@ -70,4 +60,3 @@ options = {
     .mode("overwrite")
     .save()
 )
-
