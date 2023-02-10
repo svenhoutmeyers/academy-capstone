@@ -7,12 +7,9 @@ When datasets get small enough that they might fit in the memory of the driver,
 you can call collect or toPandas on them. From that moment on, you're no longer
 working on distributed data.
 """
-
-from pathlib import Path
 from pyspark import SparkConf, SparkContext
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import *
-import os
 import boto3 
 import json 
 
@@ -33,8 +30,8 @@ config = {
 conf = SparkConf().setAll(config.items())
 spark = SparkSession.builder.config(conf=conf).getOrCreate()
 
-spark._jsc.hadoopConfiguration().set("fs.s3a.access.key", os.environ["AWS_ACCESS_KEY_ID"])
-spark._jsc.hadoopConfiguration().set("fs.s3a.secret.key", os.environ["AWS_SECRET_ACCESS_KEY"])
+#spark._jsc.hadoopConfiguration().set("fs.s3a.access.key", os.environ["AWS_ACCESS_KEY_ID"])
+#spark._jsc.hadoopConfiguration().set("fs.s3a.secret.key", os.environ["AWS_SECRET_ACCESS_KEY"])
 s3_path = "s3a://dataminded-academy-capstone-resources/raw/open_aq"
 frame = spark.read.json(s3_path)
 
